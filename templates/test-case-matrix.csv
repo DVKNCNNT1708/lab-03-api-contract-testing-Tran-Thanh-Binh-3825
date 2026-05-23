@@ -1,6 +1,7 @@
-ID,Folder,Endpoint,Method,Scenario,Input file/body,Expected status,Expected response check,Type,Pass/Fail,Evidence
-TC01,Functional,/health,GET,Service is alive,-,200,status=ok,functional,,
-TC02,Functional,/readings,POST,Create reading happy path,mock-data/sensor-reading-valid.json,201,"has reading_id, accepted=true",functional,,
-TC03,Negative,/readings,POST,Missing device_id,mock-data/sensor-reading-invalid-missing-device.json,400,Problem Details,negative,,
-TC04,Auth,/readings,POST,Missing token,mock-data/sensor-reading-valid.json,401,Problem Details,auth,,
-TC05,Boundary,/readings,POST,High temperature boundary,mock-data/sensor-reading-boundary.json,201/400,documented behavior,boundary,,
+ID,Folder,Endpoint,Method,Scenario,Expected status,Type,Pass/Fail
+TC01,01_Functional,/vision/detect,POST,Create detection happy path,202,functional,Pass
+TC02,02_Auth,/vision/detect,POST,Missing token,401,auth,Pass
+TC03,03_Negative,/vision/detect,POST,Invalid UUID,422,negative,Pass
+TC04,04_Boundary_Reliability,/vision/detections/{id},GET,ID not found,404,boundary,Pass
+TC05,05_Consumer_side_Smoke,/vision/detections/{id},GET,Call AI Vision Mock,200,smoke,Pass
+TC06,06_Local_only_NonFunctional,/vision/models/info,GET,Check response time local,200,non-functional,Pass
